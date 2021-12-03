@@ -25,7 +25,7 @@ export default function Index(props: any) {
               pass = e
             }}/>
             <Button style={{marginTop: "15px"}} type={"outline"} onClick={() => {
-              query2("/users?login="+login+"&password="+pass,"GET",undefined,(e:any)=>{
+              query2("/users?username="+login+"&password="+pass,"GET",undefined,(e:any)=>{
                 localStorage.setItem("login",login)
                 localStorage.setItem("pass",pass)
                 localStorage.setItem("id",e[0].id)

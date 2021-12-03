@@ -167,7 +167,8 @@ export default function EditProfile({
               </>
             ) : null}
             <div>Пароль</div>
-            <Input onInput={() => {
+            <Input defaultValue={userInfo.password} onInput={(e) => {
+              userInfo.password=e
             }} type={"password"}/>
 
           </div>

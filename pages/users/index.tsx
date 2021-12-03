@@ -13,13 +13,9 @@ export default function Index(){
   const [users, setUsers] = useState([])
   useEffect(()=>{
     userRole=parseJwt().sub
-
     setTabs(getMenuTabs(userRole))
-
-
     query2("/users","GET",undefined,(e:any)=>{
       setUsers(e)
-
     })
   },[])
 
@@ -30,7 +26,17 @@ export default function Index(){
       <div className={styles.parent}>
         <div className={styles.content}>
           <div className={styles.searchContainer} style={{marginBottom:"30px"}}>
-            <Input onInput={(e)=>{}} placeholder={"Поиск"}></Input>
+            <Input onInput={(e)=>{
+              if(!e){
+                query2("/users","GET",undefined,(e:any)=>{
+                  setUsers(e)
+                })
+              }else{
+                query2("/users?q="+e,"GET",undefined,(e:any)=>{
+                  setUsers(e)
+                })
+              }
+            }} placeholder={"Поиск"}></Input>
           </div>
           <UsersList users={users}/>
         </div>

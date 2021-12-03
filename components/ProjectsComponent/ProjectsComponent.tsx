@@ -50,88 +50,92 @@ export default function ProjectsComponents({
       <div className={styles.projectsList}>
 
 
-        {projects.map((e, i) => {
+        {projects?.length>0?(
+          <>
+            {projects.map((e, i) => {
 
 
-          if (width < 700) {
-            return (
-              <>
-                <ProjectItem mode={"strict"} color={"outline"} text={
-                  <div className={styles.projectsListParent}>
-                    <div className={styles.component}>
-                      <div className={styles.title}>{e.name}</div>
-                      <div className={styles.desc}>{e.desc}</div>
-                      {e.tags && e.tags.length > 0 ? (
+              if (width < 700) {
+                return (
+                  <>
+                    <ProjectItem mode={"strict"} color={"outline"} text={
+                      <div className={styles.projectsListParent}>
                         <div className={styles.component}>
-                          <div className={styles.title}>Направления проекта</div>
-                          <div className={styles.tagsParent}>
-                            {e.tags.map((e) => {
-                              return <> <TagItem>{e}</TagItem></>
-                            })}
+                          <div className={styles.title}>{e.name}</div>
+                          <div className={styles.desc}>{e.desc}</div>
+                          {e.tags && e.tags.length > 0 ? (
+                            <div className={styles.component}>
+                              <div className={styles.title}>Направления проекта</div>
+                              <div className={styles.tagsParent}>
+                                {e.tags.map((e) => {
+                                  return <> <TagItem>{e}</TagItem></>
+                                })}
+                              </div>
+                            </div>
+                          ) : null}
+                          <div className={styles.deadlineAndCost}>
+                            <div>{e.cost} руб.</div>
+                            <div>Срок реализации: <span className={styles.greenDate}>{e.deadline}</span></div>
+                          </div>
+                          <div className={styles.buttonsBlock}>
+                            <Button type={"outline"} size={"s"} onClick={() => {
+                              window.location.href = "/projects/" + e.id
+                            }}>Подробнее</Button>
+                            <Button type={"outline"} size={"s"} onClick={() => {
+                              window.location.href="/projects/edit/"+e.id
+                            }}>Редактировать</Button>
+                            <Button type={"outline red"} size={"s"}>Удалить</Button>
                           </div>
                         </div>
-                      ) : null}
-                      <div className={styles.deadlineAndCost}>
-                        <div>{e.cost} руб.</div>
-                        <div>Срок реализации: <span className={styles.greenDate}>{e.deadline}</span></div>
                       </div>
-                      <div className={styles.buttonsBlock}>
-                        <Button type={"outline"} size={"s"} onClick={() => {
-                          window.location.href = "/projects/" + e.id
-                        }}>Подробнее</Button>
-                        <Button type={"outline"} size={"s"} onClick={() => {
-                          window.location.href="/projects/edit/"+e.id
-                        }}>Редактировать</Button>
-                        <Button type={"outline red"} size={"s"}>Удалить</Button>
-                      </div>
-                    </div>
-                  </div>
-                }
-                             onButtonClick={() => setIsEditProject(i)}></ProjectItem>
-              </>
-            )
-          }
-
-          return (
-            <>
-              <ProjectItem mode={"strict"} color={"outline"} text={
-                <div className={styles.projectsListParent}>
-                  <div className={styles.component}>
-                    <div className={styles.title}>{e.name}</div>
-                    <div className={styles.desc}>{e.desc}</div>
-                    <div className={styles.deadlineAndCost}>
-                      {e.cost ? (<div>{e.cost} руб.</div>) : <div style={{marginRight: "-10px"}}/>}
-                      {e.deadline?(<div>Срок реализации: <span className={styles.greenDate}>{e.deadline}</span></div>):null}
-                    </div>
-                  </div>
-                  <div className={styles.component}>
-                    {e.tags && e.tags.length > 0 ? (
-                      <>
-                        <div className={styles.title}>Направления проекта</div>
-                        <div className={styles.tagsParent}>
-                          {e.tags.map((e) => {
-                            return <> <TagItem>{e}</TagItem></>
-                          })}
-                        </div>
-                      </>
-                    ) : null}
-
-                    <div className={styles.buttonsBlock}>
-                      <Button type={"outline"} size={"s"} onClick={() => {
-                        window.location.href = "/projects/" + e.id
-                      }}>Подробнее</Button>
-                      <Button type={"outline"} size={"s"} onClick={() => {
-                        window.location.href="/projects/edit/"+e.id
-                      }}>Редактировать</Button>
-                      <Button type={"outline red"} size={"s"}>Удалить</Button>
-                    </div>
-                  </div>
-                </div>
+                    }
+                                 onButtonClick={() => setIsEditProject(i)}></ProjectItem>
+                  </>
+                )
               }
-              ></ProjectItem>
-            </>
-          )
-        })}
+
+              return (
+                <>
+                  <ProjectItem mode={"strict"} color={"outline"} text={
+                    <div className={styles.projectsListParent}>
+                      <div className={styles.component}>
+                        <div className={styles.title}>{e.name}</div>
+                        <div className={styles.desc}>{e.desc}</div>
+                        <div className={styles.deadlineAndCost}>
+                          {e.cost ? (<div>{e.cost} руб.</div>) : <div style={{marginRight: "-10px"}}/>}
+                          {e.deadline?(<div>Срок реализации: <span className={styles.greenDate}>{e.deadline}</span></div>):null}
+                        </div>
+                      </div>
+                      <div className={styles.component}>
+                        {e.tags && e.tags.length > 0 ? (
+                          <>
+                            <div className={styles.title}>Направления проекта</div>
+                            <div className={styles.tagsParent}>
+                              {e.tags.map((e) => {
+                                return <> <TagItem>{e}</TagItem></>
+                              })}
+                            </div>
+                          </>
+                        ) : null}
+
+                        <div className={styles.buttonsBlock}>
+                          <Button type={"outline"} size={"s"} onClick={() => {
+                            window.location.href = "/projects/" + e.id
+                          }}>Подробнее</Button>
+                          <Button type={"outline"} size={"s"} onClick={() => {
+                            window.location.href="/projects/edit/"+e.id
+                          }}>Редактировать</Button>
+                          <Button type={"outline red"} size={"s"}>Удалить</Button>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                  ></ProjectItem>
+                </>
+              )
+            })}
+          </>
+        ):null}
       </div>
     </div>
   )

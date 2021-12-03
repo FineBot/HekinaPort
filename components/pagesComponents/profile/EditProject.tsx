@@ -62,6 +62,13 @@ export default function EditProject({
 
   useEffect(()=>{
     setProjectTechTags(projectInfo.tech)
+
+    let buff:any=projectInfo
+    buff=buff?.team?.members
+
+    setSelectOptions(buff?.map((e:any)=>{
+      return {value:e.id,text:e.lastName+" "+e.firstName+" "+e.middleName}
+    }))
   },[projectInfo])
 
 
@@ -89,11 +96,13 @@ export default function EditProject({
                 return {value:e.id,text:e.name}
               })
             } onChange={(e)=>{
-              projectInfo.team=teams.filter((ex)=>ex.id===e)[0]
+              projectInfo.team=teams.filter((ex)=>ex?.id?.toString()===e.toString())[0]
+              console.log(projectInfo)
 
               let buff:any=projectInfo
-              buff=buff.members
-              setSelectOptions(buff.map((e:any)=>{
+              buff=buff.team.members
+
+              setSelectOptions(buff?.map((e:any)=>{
                 return {value:e.id,text:e.lastName+" "+e.firstName+" "+e.middleName}
               }))
             }}></Select>

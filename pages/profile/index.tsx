@@ -53,6 +53,8 @@ export default function Index(props: any) {
   }
   const [userInfo, setUserInfo] = useState(data)
   const [tabs, setTabs] = useState(getMenuTabs(userRole))
+  let pr:projectData[]=[{desc: "", name: "", tags: []}]
+  const [teamProjects, setTeamProjects] = useState(pr)
 
   let reportsInit: reportDate[] = [
     {author: {firstName: "", lastName: "", middleName: "", id: ""}, title: "fdfsf", publishDate: "24.11.2020"},
@@ -92,11 +94,18 @@ export default function Index(props: any) {
           ex.members.forEach((ey: any) => {
             if (ey.id.toString() === localStorage.getItem("id")) {
               setMyTeam(ex)
+
+              query2("/projects?team.id="+ex.id, "GET", undefined, (e: any) => {
+                setTeamProjects(e)
+              })
+
             }
           })
         }
       })
     })
+
+
   }, [])
 
 
@@ -364,8 +373,8 @@ export default function Index(props: any) {
   }
 
   function projectsPage() {
-    return <ProjectsComponents isEditProject={isEditProject} projects={projects} setProjects={(e) => {
-      setProjects(e)
+    return <ProjectsComponents isEditProject={isEditProject} projects={teamProjects} setProjects={(e) => {
+      setTeamProjects(e)
     }} setIsEditProject={(e) => {
       setIsEditProject(e)
     }}/>

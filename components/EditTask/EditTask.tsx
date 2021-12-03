@@ -35,7 +35,6 @@ export function EditTask({task, save}:EditTaskProps){
   },[task])
 
 
-
   useEffect(()=>{
     let buff = JSON.parse(JSON.stringify(tags))
     buff.forEach((e:any,i:number)=>{
@@ -86,7 +85,6 @@ export function EditTask({task, save}:EditTaskProps){
       <Button style={{marginTop:"20px"}} type={"outline"} onClick={(e:any)=>{
         let buff=JSON.parse(JSON.stringify(taskData))
         buff.tags=[]
-
         tags.forEach((e)=>{if(e.checked)buff.tags.push(e.name)})
         save(buff)
       }}>Сохранить</Button>

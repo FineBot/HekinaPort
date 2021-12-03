@@ -32,7 +32,17 @@ export default function Teams(){
       <div className={styles.parent}>
         <div className={styles.content}>
           <div className={styles.searchContainer} style={{marginBottom:"30px"}}>
-            <Input onInput={(e)=>{}} placeholder={"Поиск"}></Input>
+            <Input onInput={(e)=>{
+              if(!e){
+                query2("/teams","GET",undefined,(e:any)=>{
+                  setTeams(e)
+                })
+              }else{
+                query2("/teams?q="+e,"GET",undefined,(e:any)=>{
+                  setTeams(e)
+                })
+              }
+            }} placeholder={"Поиск"}></Input>
           </div>
           <TeamsList teams={teams} setTeams={(e:teamData[])=>{setTeams(e)}}/>
 

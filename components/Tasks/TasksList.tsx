@@ -32,6 +32,13 @@ export default function TasksList({userId = "", userRole,tasksElements}: TasksLi
       buff[editTask]=e
       setTasks(buff)
       setEditTask(-1)
+
+      let buff1:any = JSON.parse(JSON.stringify(e))
+      buff1.author=localStorage.getItem("id")
+      query2("/tasks/"+e.id,"PUT",buff1,()=>{
+      },()=>{
+      })
+
     }} task={tasks[editTask]}/>
   }
 

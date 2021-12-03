@@ -11,10 +11,16 @@ interface TeamsListProps{
 }
 
 export default function TeamsList({teams,setTeams}:TeamsListProps){
-
+  const [projects, setProjects] = useState([])
 
   useEffect(()=>{
-
+    let buff:any={}
+    teams.forEach((e)=>{
+      query2("/projects?team.id="+e.id,"GET",undefined,(ex:any)=>{
+        buff['team'+e.id]=ex
+      })
+    })
+    setProjects(buff)
   },[])
 
   return(
@@ -38,6 +44,7 @@ export default function TeamsList({teams,setTeams}:TeamsListProps){
                   })}
                 </div>
                 <div>
+                  <div>{e.id}</div>
                   {e.projects?.map((ex)=>{
                     return <><div>{ex.name}</div></>
                   })}

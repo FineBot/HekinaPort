@@ -13,7 +13,6 @@ export interface userData {
   lastName: string,
   middleName: string,
   birthday?: Date,
-  email?: string,
   phone?: string,
   gender?: string,
   city?: string,
@@ -22,10 +21,11 @@ export interface userData {
   tgLink?: string,
   id:string,
   roles?:string[], // права
-  username?:string,
+  username?:string, // он же почта и логин
   position?:string, // роль в команде
   team?:string,
   university?:string,
+  password?:string,
 }
 
 export interface tech{

@@ -29,7 +29,7 @@ export default function Select({options, onChange,title=undefined, defaultValue=
       <select ref={re} defaultValue={df} onChange={(e)=>{
         onChange(e.target.value)
       }}>
-        {options.map((e)=>{
+        {options?.map((e)=>{
           return <><option value={e.value}>{e.text}</option></>
         })}
       </select>

@@ -25,6 +25,11 @@ export default function TaskId(props:any){
   useEffect(()=>{
     query2("/tasks/"+params.query.id,"GET",undefined,(e:any)=>{
       setTaskData(e)
+      query2("/users/?id="+e.author,"GET",undefined,(ex:any)=>{
+        let buff = JSON.parse(JSON.stringify(e))
+        buff.author=ex[0]
+        setTaskData(buff)
+      })
     },()=>{})
   },[params])
   return(

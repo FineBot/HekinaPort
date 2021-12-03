@@ -22,11 +22,14 @@ export default function Create(props:any){
       <div className={styles.parent}>
         <div className={styles.content}>
           <EditTask save={(e)=>{
-            let buff:reportDate = JSON.parse(JSON.stringify(e))
-            query("/v1/users/"+parseJwt().id,"GET",undefined,(e:any)=>{
-              buff.author=e
-              query2("/tasks","POST",buff,()=>{},()=>{})
-            },()=>{})
+            let buff:any = JSON.parse(JSON.stringify(e))
+            buff.author=localStorage.getItem("id")
+            query2("/tasks","POST",buff,()=>{
+              window.location.href="/profile"
+            },()=>{
+              window.location.href="/profile"
+
+            })
           }} task={task}/>
         </div>
       </div>
