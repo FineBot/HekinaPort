@@ -1,0 +1,83 @@
+@import "../../../colors";
+
+.parent {
+  padding-top: 80px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  background: url("/static/images/vectorpaint.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: bottom 0px left 7vw;
+
+  @media(max-width: 1200px) {
+    background-size: 100%;
+    background-position: bottom 7vw left 7vw;
+  }
+
+  @media(max-width: 700px) {
+    background-size: 200%;
+    background-position: bottom 8vw left -45vw;
+  }
+
+  img{
+    position: absolute;
+    right: 0;
+    bottom: 0px;
+    background-color: black;
+    width: fit-content;
+  }
+
+  .titleContainer {
+    max-width: 1300px;
+    margin-top: -300px;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    @media(max-width: 700px) {
+      align-items: center;
+      justify-content: center;
+      margin-top: -200px;
+    }
+
+    & div:nth-child(1){
+      padding: 10px;
+
+      @media(max-width: 700px) {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        row-gap: 50px;
+        align-items: center;
+        justify-content: center;
+      }
+
+      h1 {
+        margin: 10px 0px;
+        max-width: 750px;
+        font-weight: 800;
+        font-size: 60px;
+        line-height: 69.6px;
+        color:$black;
+        @media(max-width: 1200px) {
+          line-height: normal;
+          font-size: 4vw;
+        }
+        @media(max-width: 700px) {
+          line-height: normal;
+          font-size: 7vw;
+        }
+        display: flex;
+        justify-self: flex-start;
+
+      }
+    }
+  }
+}
+
+

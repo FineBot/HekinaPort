@@ -1,0 +1,115 @@
+@import "components/colors";
+
+.parent{
+  transition: all 100ms;
+  padding: 20px 45px;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 30px;
+  max-width: fit-content;
+  font-family: MoscowSans;
+
+  cursor: pointer;
+
+  &:hover{
+    -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  }
+  &:active{
+    transform: translateY(2px);
+  }
+}
+
+.parent[buttonsize=s]{
+  padding: 5px 15px;
+}
+.parent[buttonsize=m]{
+  padding: 10px 15px;
+}
+
+.greenButton {
+  @extend .parent;
+
+  background-color: $green;
+
+  font-style: normal;
+  font-weight: 300;
+
+  font-size: 16px;
+  line-height: 16px;
+
+  color: #FFFFFF;
+}
+
+.outlineButton{
+  @extend .parent;
+  border: 1px $green solid;
+  padding: 10px 30px;
+  color:$green;
+
+  &:hover{
+    background-color: $green;
+    color: white;
+  }
+}
+
+.outlineRedButton{
+  @extend .parent;
+  border: 1px $red solid;
+  color:white;
+
+  color: $red;
+  &:hover{
+    background-color: $red;
+    color: white;
+  }
+}
+
+
+.outlineRevertButton{
+  @extend .parent;
+  border: 1px white solid;
+  color:white;
+
+  &:hover{
+    background-color: white;
+    color: $green;
+  }
+}
+
+.text{
+   @extend .parent;
+   border: 0px;
+  padding: 0px;
+
+  color:$green;
+
+  &:hover{
+    background-color:transparent;
+  }
+ }
+
+.textRed{
+  @extend .parent;
+  border: 0px;
+  padding: 0px;
+  color:$red;
+
+  &:hover{
+    background-color:transparent;
+  }
+}
+
+.textBlue{
+  @extend .parent;
+  border: 0px;
+  padding: 0px;
+  color:$blue;
+
+  &:hover{
+    background-color:transparent;
+  }
+}
+
+

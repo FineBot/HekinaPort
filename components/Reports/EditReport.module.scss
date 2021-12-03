@@ -1,0 +1,45 @@
+.parent{
+
+  display: grid;
+  row-gap: 25px;
+}
+
+.buttonParent{
+  display: flex;
+  justify-content: center;
+}
+
+.reportsParent{
+  display: grid;
+  row-gap: 10px;
+  .title{
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .fio{
+    font-size: 18px;
+  }
+  .date{
+    color: gray;
+  }
+  .buttonParent{
+    justify-content: flex-start;
+    display: flex;
+    row-gap: 10px;
+    column-gap: 10px;
+  }
+}
+
+.reportComponents{
+  display: flex;
+  row-gap: 10px;
+  flex-wrap: wrap;
+  column-gap: 10px;
+}
+
+.parentContainer{
+  display: grid;
+  row-gap: 20px;
+}
+

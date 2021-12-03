@@ -1,0 +1,231 @@
+@import "components/colors";
+
+.parent {
+  * {
+    font-family: MoscowSans;
+  }
+
+  margin-top: 120px;
+  display: flex;
+  justify-content: center;
+
+  @media(max-width: 700px) {
+    margin-top: 90px;
+  }
+
+  .content {
+    max-width: 1250px;
+    width: 100%;
+    padding: 15px;
+
+    .headerButtons{
+      margin-bottom: 70px;
+      display: grid;
+      row-gap: 15px;
+      column-gap: 10px;
+      grid-template-columns: 250px 150px 150px;
+
+      h1{
+        cursor: pointer;
+        margin: 0px;
+        font-size: 26px;
+        width: fit-content;
+        color:gray;
+      }
+      h1[selected=true]{
+        color: black;
+        color: $green;
+        border-bottom: 5px $green solid;
+      }
+
+      @media(max-width: 700px) {
+        grid-template-columns: 170px 1fr;
+        justify-self: flex-start;
+        h1{
+          font-size: 20px;
+        }
+      }
+    }
+
+    @media(max-width: 700px) {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    h2, h3 {
+      margin: 0px;
+    }
+    .profileInfo{
+      display: flex;
+      row-gap: 70px;
+      column-gap: 50px;
+      flex-wrap: wrap;
+      .groupData{
+        flex: 1 1 40%;
+        .groupName{
+          margin-bottom: 15px;
+          font-size: 16px;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          & div:nth-child(2){
+            display: flex;
+            justify-content: flex-end;
+          }
+        }
+        .usersList{
+          display: flex;
+          column-gap: 10px;
+          row-gap: 10px;
+          flex-wrap: wrap;
+          & div:nth-child(n){
+            flex: 1 1 30%;
+            min-width: 250px;
+            & div:nth-child(n){
+              min-width: auto;
+              flex: 1 1 auto;
+              width: fit-content;
+            }
+          }
+        }
+      }
+      .userData {
+        flex: 1 1 auto;
+        display: grid;
+        font-size: 18px;
+        row-gap: 15px;
+        column-gap: 10px;
+
+        align-items: center;
+
+        grid-template-columns: 250px 300px;
+        @media(max-width: 600px){
+          grid-template-columns: 170px 200px;
+          font-size: 16px;
+        }
+        @media(max-width: 420px){
+          grid-template-columns: 170px 170px;
+          font-size: 16px;
+        }
+        @media(max-width: 385px){
+          grid-template-columns: 120px 170px;
+          font-size: 16px;
+        }
+
+        & div:nth-child(n){
+          word-wrap: break-word;
+        }
+
+        .tagsParent{
+          display: flex;
+          row-gap: 5px;
+          column-gap: 5px;
+          flex-wrap: wrap;
+        }
+      }
+    }
+  }
+}
+
+.editProfileContainerParent{
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+  column-gap: 50px;
+  row-gap: 50px;
+  flex-wrap: wrap;
+
+}
+
+.editPageTagsParent{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  height: fit-content;
+  row-gap: 15px;
+  column-gap: 15px;
+
+  @media(max-width: 1300px) {
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+.editProjectPageTagsParent{
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  height: fit-content;
+  row-gap: 5px;
+  column-gap: 15px;
+
+  @media(max-width: 1300px) {
+    grid-template-columns: repeat(3,1fr);
+  }
+  @media(max-width: 1000px) {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+
+}
+
+
+.editProjectPageContainer{
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 40px;
+  width: 100%;
+
+  @media(max-width: 850px) {
+    flex-direction: column;
+    justify-content: stretch;
+  }
+
+  .projectData{
+    flex: 1 1 40%;
+    row-gap: 20px;
+    display: flex;
+    flex-direction: column;
+
+
+
+    .costAndDeadline{
+      display: flex;
+      justify-content: space-between;
+      column-gap: 15px;
+
+      & *:nth-child(n){
+        flex: 1 1 auto;
+      }
+    }
+  }
+}
+
+.searchContainer{
+  display: flex;
+  row-gap: 10px;
+  column-gap: 5px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  @media(max-width: 700px) {
+    flex-direction: column;
+  }
+
+  & div:nth-child(1){
+    flex: 1 1 60%;
+  }
+  & div:nth-child(2){
+    flex: 1 1 30%;
+  }
+}
+
+.subtitle{
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}

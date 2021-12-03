@@ -1,0 +1,63 @@
+@import "components/colors";
+
+.parent{
+  display: flex;
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+  border: 2px $green solid;
+  column-gap: 50px;
+  .title{
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 24px;
+    align-items: center;
+    color: #000000;
+
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: keep-all;
+    line-break: auto;
+    hyphens: manual;
+    max-width: 100%;
+  }
+  .container{
+    display: block;
+    position: relative;
+    max-width: 100%;
+
+
+    .userInfo{
+      display: grid;
+      margin-top: 10px;
+      grid-template-columns: 16px 1fr;
+      column-gap: 10px;
+      row-gap: 10px;
+      align-items: center;
+
+      & div:nth-child(n){
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        word-break: keep-all;
+        line-break: auto;
+        hyphens: manual;
+      }
+      & img:nth-child(n){
+        width: 16px;
+      }
+    }
+  }
+
+  .containerOfSkills{
+    margin-top: 5px;
+    flex-wrap: wrap;
+    display: flex;
+    row-gap: 5px;
+    column-gap: 5px;
+    & div:nth-child(n){
+      width: fit-content;
+      flex:0 0 auto;
+    }
+  }
+}

@@ -1,0 +1,111 @@
+.parent {
+  *{
+    font-family: MoscowSans;
+  }
+
+  animation: theme 21s linear infinite;
+  &:after,
+  &:before {
+    content: '';
+    display: block;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    width: 100vmax;
+    height: 100vmax;
+    background: rgba(0,0,0,0.05);
+    animation: background 90s linear infinite;
+  }
+
+  &:after {
+    left: 15vw;
+  }
+
+  &:before {
+    right: 15vw;
+    animation-delay: -30s;
+    animation-direction: reverse;
+  }
+
+  & div:nth-child(1){
+    height: calc(100vh - 20px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    .loginCard{
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 25px;
+      max-width: 500px;
+      height: fit-content;
+      width: 100%;
+      row-gap: 10px;
+
+
+      background-color: white;
+      border-radius: 15px;
+
+      -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+      -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+      box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+
+      h1{
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        font-size: 24px;
+        font-family: MoscowSans;
+        margin-bottom: 15px;
+
+      }
+    }
+  }
+}
+
+@keyframes theme {
+  0% {
+    background: #74C390;
+  }
+
+  16% {
+    background: #5DBDB6;
+  }
+
+  33% {
+    background: #59D4E1;
+  }
+
+  50% {
+    background: #51BCE8;
+  }
+
+  66% {
+    background: #FA5374;
+  }
+
+  83% {
+    background: #E46653;
+  }
+
+  100% {
+    background: #74C390;
+  }
+}
+
+@keyframes background {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+

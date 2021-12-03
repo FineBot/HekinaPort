@@ -1,0 +1,86 @@
+@import "../../../colors";
+
+.parent {
+  min-height:500px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 150px;
+  background-color: $green;
+
+  .content {
+    max-width: 1250px;
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+    padding: 15px;
+
+    h1 {
+      color: white;
+      max-width: 750px;
+    }
+
+    .items {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      column-gap: 15px;
+      flex-wrap: wrap;
+      row-gap: 15px;
+      width: 100%;
+
+      @media(max-width: 1000px) {
+        grid-template-columns: repeat(2,1fr);
+
+      }
+      @media(max-width: 700px) {
+        grid-template-columns: repeat(1,1fr);
+
+      }
+
+      & div:nth-child(n) {
+        transition: all 100ms ease;
+        animation: show 500ms;
+
+
+      }
+      & div:nth-child(n)[hide=true]{
+        transition: all 100ms ease;
+        animation: hide 500ms;
+        animation-fill-mode: forwards;
+      }
+    }
+
+  }
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+    margin-top: -10px;
+    margin-bottom: 10px;
+
+  }
+  to {
+    opacity: 1;
+    margin-top: 0px;
+    margin-bottom: 00px;
+
+  }
+}
+
+@keyframes hide {
+
+  from{
+    opacity: 1;
+    margin-top: 0px;
+    margin-bottom: 00px;
+  }
+  to {
+    opacity: 0;
+    margin-top: -10px;
+    margin-bottom: 10px;
+  }
+}

@@ -1,0 +1,92 @@
+@import "components/colors";
+
+
+.parent {
+  display: flex;
+  justify-content: space-between;
+  row-gap: 20px;
+  column-gap: 70px;
+  flex-wrap: wrap;
+
+  & div:nth-child(1) {
+    flex: 1 1 40%;
+  }
+
+  & div:nth-child(2) {
+    flex: 1 1 30%;
+  }
+
+  .component {
+    position: relative;
+    max-width: 100%;
+    display: grid;
+    align-content: flex-start;
+    row-gap: 20px;
+
+    .title {
+      font-size: 30px;
+    }
+
+    .subtitle {
+      font-size: 20px;
+
+      span{
+        color: $green;
+      }
+    }
+
+    .text {
+      max-width: 800px;
+      color: #7A7A7A;
+      word-wrap: break-word;
+
+      @media(max-width: 1300px){
+        max-width: 600px;
+      }
+      @media(max-width: 1000px){
+        max-width: 400px;
+      }
+      @media(max-width: 700px) {
+        max-width: 92vw;
+      }
+      @media(max-width: 550px) {
+        max-width: 90vw;
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: $blue;
+    }
+
+    .tagsParent {
+      display: flex;
+      row-gap: 5px;
+      column-gap: 5px;
+      flex-wrap: wrap;
+
+      & div:nth-child(n) {
+        flex: 0 0 auto;
+        width: fit-content;
+      }
+    }
+
+    .costAndDeadline {
+      display: flex;
+      width: 100%;
+      column-gap: 20px;
+      row-gap: 20px;
+      justify-content: space-between;
+
+      .cost {
+        font-size: 30px;
+        color: $green;
+      }
+    }
+  }
+}
+
+.teamParent{
+  display: grid;
+  row-gap: 10px;
+}

@@ -1,0 +1,46 @@
+.parent{
+  background-color: #F6F7FA;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  *{
+    font-family: "MoscowSans";
+    font-weight: 600;
+  }
+  h1{
+    font-family: MoscowSans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 42px;
+    display: flex;
+    align-items: center;
+
+    color: #000000;
+  }
+}
+
+@font-face {
+  font-family: Roboto;
+  src: url("/static/fonts/Roboto/Roboto-Light.ttf");
+  font-weight: 100;
+}
+@font-face {
+  font-family: Roboto;
+  src: url("/static/fonts/Roboto/Roboto-Bold.ttf");
+  font-weight: 600;
+}
+@font-face {
+  font-family: Roboto;
+  src: url("/static/fonts/Roboto/Roboto-Regular.ttf");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: DaysOne;
+  src: url("/static/fonts/DaysOne/DaysOne-Regular.ttf");
+}
+@font-face {
+  font-family: "MoscowSans";
+  src: url("/static/fonts/MoscowSans/moscowsansregular.ttf");
+}

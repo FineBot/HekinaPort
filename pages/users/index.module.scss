@@ -1,0 +1,19 @@
+.parent {
+  * {
+    font-family: MoscowSans;
+  }
+
+  margin-top: 120px;
+  display: flex;
+  justify-content: center;
+
+  @media(max-width: 700px) {
+    margin-top: 90px;
+  }
+
+  .content {
+    max-width: 1250px;
+    width: 100%;
+    padding: 15px;
+  }
+}

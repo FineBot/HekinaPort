@@ -1,0 +1,25 @@
+@import "components/colors";
+
+.parent{
+  background-color: $blue;
+  color: white;
+  padding: 5px;
+  width: fit-content;
+  border-radius: 7px;
+  font-size: 14px;
+
+  line-break: unset;
+  word-wrap: unset;
+}
+.parent[color=green]{
+  background-color: $green;
+}
+.parent[color=white]{
+  background-color: #e8e8e8;
+
+  color: black;
+
+  -webkit-box-shadow: 5px 5px 5px -6px rgba(34, 60, 80, 0.6);
+  -moz-box-shadow: 5px 5px 5px -6px rgba(34, 60, 80, 0.6);
+  box-shadow: 5px 5px 5px -6px rgba(34, 60, 80, 0.6);
+}

@@ -1,0 +1,26 @@
+.parent{
+  .title{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  select{
+
+    border-radius: 10px;
+    min-height: 30px;
+    width: 100%;
+    outline: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: 400;
+
+    border: 1px solid #dcdada;
+    transition: all 200ms linear;
+    background: #F6F7FA;
+
+  }
+}

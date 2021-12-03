@@ -1,0 +1,110 @@
+@import "components/colors";
+
+.projectsList {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  column-gap: 10px;
+
+  & div:nth-child(n) {
+    flex: 1 1 auto;
+  }
+}
+
+.projectsListParent {
+  display: flex;
+  row-gap: 15px;
+  column-gap: 15px;
+  flex-wrap: wrap;
+  position: relative;
+  align-content: stretch;
+
+
+  @media(max-width: 700px){
+    flex-direction: column;
+  }
+
+  & div:nth-child(1){
+    flex: 1 1 55%;
+  }
+  & div:nth-child(2){
+    flex: 1 1 20%;
+  }
+
+  .component {
+    display: grid;
+    row-gap: 10px;
+
+    .buttonsBlock{
+      height: 100%;
+
+      display: flex;
+      row-gap: 10px;
+      column-gap: 10px;
+      align-self: flex-end;
+      align-content: flex-end;
+    }
+
+    .tagsParent{
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      row-gap: 5px;
+      column-gap: 5px;
+      & *:nth-child(n){
+        max-width: fit-content;
+        flex: 0 0 auto;
+      }
+    }
+
+    .title {
+      font-weight: 600;
+    }
+
+    .desc {
+      color: #7A7A7A;
+
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: keep-all;
+      line-break: auto;
+      hyphens: manual;
+
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      max-height: 40px;
+    }
+
+    .deadlineAndCost {
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      row-gap: 10px;
+      column-gap: 10px;
+
+      & div:nth-child(n) {
+        width: fit-content;
+        flex: 0 0 auto;
+      }
+
+      & div:nth-child(1) {
+        font-weight: 300;
+        font-size: 32px;
+        margin-bottom: -4px;
+      }
+
+      & div:nth-child(2) {
+        font-size: 20px;
+
+
+        .greenDate {
+          color: $green;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
