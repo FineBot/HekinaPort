@@ -71,8 +71,8 @@ export default function TasksList({userId = "", userRole,tasksElements}: TasksLi
                       {e.desc}
                     </div>
                     <div className={styles.costAndDeadline}>
-                      <div className={styles.cost}>100 000 руб.</div>
-                      <div className={styles.deadline}>Срок реализации: <span>24.11.2002</span></div>
+                      <div className={styles.cost}>{e.budget}</div>
+                      <div className={styles.deadline}>Срок реализации: <span>{e.deadline}</span></div>
                     </div>
                   </div>
                   <div className={styles.secondColumn}>

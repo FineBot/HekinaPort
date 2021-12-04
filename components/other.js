@@ -1,15 +1,10 @@
 export function getStack(){
   return[
     "React",
-    "React",
-    "React",
-    "React",
-    "React",
-    "React",
-    "React",
-    "React",
-    "React",
-    "React",
+    "NextJS",
+    "Java",
+    "C++",
+
   ]
 }
 
