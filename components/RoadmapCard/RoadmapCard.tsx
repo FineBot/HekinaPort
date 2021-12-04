@@ -11,19 +11,23 @@ export interface RoadmapCardProps {
   description: string,
   status: RoadmapCardStatus,
   availableFrom: number,
-  imgUrl: string
+  imgUrl: string,
+  onClick?:()=>void,
 }
 
 export default function RoadmapCard(props: RoadmapCardProps) {
   return (
-    <div className={styles.roadmap_card}>
+    <div className={styles.roadmap_card} onClick={()=>{
+      if(props.onClick)
+        props.onClick()
+    }}>
       <div style={{display: "grid", gridTemplateColumns: '50% 1fr'}}>
         <div style={{padding: 20, color: props.status === RoadmapCardStatus.Unavailable ? '#CECECE' : ''}}>
           <div style={{fontWeight: 700, marginBottom: 8}}>{props.title}</div>
           <div>{props.description}</div>
         </div>
         <div style={{textAlign: "center"}}>
-          <div style={{ position: "relative", top: -2 }}>
+          <div style={{ position: "relative", top: -2, color:"white" }}>
             {props.status === RoadmapCardStatus.InProcess ?
               <div style={{ display: 'inline-block', padding: '2px 12px', background: "#009A96"}}>В процессе</div>
               : <div style={{ display: 'inline-block', padding: '2px 12px', background: "#CC2872"}}>Недоступно</div>

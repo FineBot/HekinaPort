@@ -53,6 +53,12 @@ export default function EditProject({
 
     query2("/teams","GET",undefined,(e:any)=>{
       setTeams(e)
+      if(!projectInfo.team)
+        if(e.length>0){
+          projectInfo.team=e[0].id
+          console.log(e[0].id)
+        }
+
     })
   }, [])
 
@@ -69,6 +75,16 @@ export default function EditProject({
     setSelectOptions(buff?.map((e:any)=>{
       return {value:e.id,text:e.lastName+" "+e.firstName+" "+e.middleName}
     }))
+
+    buff = JSON.parse(JSON.stringify(tags))
+    if (projectInfo.tags) {
+      tags.forEach((item, index) => {
+        if (projectInfo.tags?.indexOf(item.name) != -1) {
+          buff[index].checked = true
+        }
+      })
+    }
+    setTag(buff)
   },[projectInfo])
 
 
@@ -91,7 +107,7 @@ export default function EditProject({
               <Input title={"Сроки реализации"} onInput={(e)=>{projectInfo.deadline=e}} defaultValue={projectInfo.deadline} type={"date"}></Input>
             </div>
             <Input title={"Сайт"} onInput={(e)=>{projectInfo.site=e}} defaultValue={projectInfo.site}></Input>
-            <Select defaultValue={projectInfo.team?projectInfo.team.id:undefined} title={"Команда"} options={
+            <Select defaultValue={projectInfo.team?projectInfo.team.id:teams[0]?.id} title={"Команда"} options={
               teams.map((e:any,i:number)=>{
                 return {value:e.id,text:e.name}
               })
@@ -109,7 +125,7 @@ export default function EditProject({
             <div>
               <Select title={"Контактное лицо"} options={selectOptions} onChange={(e)=>{
                 let buff:any=projectInfo
-                projectInfo.contact=buff.members.filter((ex:any)=>{
+                projectInfo.contact=buff.team.members?.filter((ex:any)=>{
                   return ex.id.toString()===e.toString()
                 })[0]
                 console.log(projectInfo.contact)

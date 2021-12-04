@@ -13,6 +13,7 @@ import {parseJwt, query2} from "../../components/other";
 import ReportsList from "../../components/Reports/ReportsList";
 import RoadmapPage from "../../components/RoadmapPage/RoadmapPage";
 import RoadmapCard, {RoadmapCardStatus} from "../../components/RoadmapCard/RoadmapCard";
+import Achievements from "../../components/Achievement/Achievement";
 
 declare module 'react' {
   interface HTMLAttributes<T> extends DOMAttributes<T> {
@@ -49,7 +50,7 @@ export default function Index(props: any) {
   }
   const [userInfo, setUserInfo] = useState(data)
   const [tabs, setTabs] = useState(getMenuTabs(userRole))
-  let pr:projectData[]=[{desc: "", name: "", tags: []}]
+  let pr: projectData[] = [{desc: "", name: "", tags: []}]
   const [teamProjects, setTeamProjects] = useState(pr)
 
   let reportsInit: reportDate[] = [
@@ -60,7 +61,7 @@ export default function Index(props: any) {
 
   let tasks: taskData[] = [{name: "", desc: "", tags: []}]
   const [tasksElements, setTasksElements] = useState(tasks)
-  let b:teamData={members: [], name: ""}
+  let b: teamData = {members: [], name: ""}
   const [myTeam, setMyTeam] = useState(b)
 
   useEffect(() => {
@@ -91,7 +92,7 @@ export default function Index(props: any) {
             if (ey.id.toString() === localStorage.getItem("id")) {
               setMyTeam(ex)
 
-              query2("/projects?team.id="+ex.id, "GET", undefined, (e: any) => {
+              query2("/projects?team.id=" + ex.id, "GET", undefined, (e: any) => {
                 setTeamProjects(e)
               })
 
@@ -109,18 +110,12 @@ export default function Index(props: any) {
   const [isEditProject, setIsEditProject] = useState(-1)
 
 
-
   // РОАДМАП СТАВИТСЯ ТУТ /\/\
   //                      \  /
   //                       \/
 
 
-  const [roadmapPage,setRoadmapPage]=useState(true)
-
-
-
-
-
+  const [roadmapPage, setRoadmapPage] = useState(false)
 
 
   const firstTitleButton: React.RefObject<any> = React.createRef()
@@ -233,24 +228,48 @@ export default function Index(props: any) {
       <Header tabs={tabs}/>
       <div className={styles.parent}>
         <div className={styles.content}>
-          <div className={styles.headerButtons}>
-            <h1 ref={firstTitleButton} onClick={() => setProfileActiveTab(0)}>Личный кабинет</h1>
+          <div style={{
+            display: "flex",
+
+
+          }}>
+            <div className={styles.headerButtons}>
+              <h1 ref={firstTitleButton} onClick={() => setProfileActiveTab(0)}>Личный кабинет</h1>
+              {userRole === "user" ? (
+                <><h1 ref={secondTitleButton} onClick={() => setProfileActiveTab(1)}>Проекты</h1>
+
+
+                </>
+              ) : null}
+              {userRole === "worker" ? (
+                <>
+                  <h1 ref={secondTitleButton} onClick={() => setProfileActiveTab(1)}>Задачи</h1>
+                  <h1 ref={lastTitleButton} onClick={() => setProfileActiveTab(3)}>Мои отчеты</h1>
+                </>) : null}
+            </div>
             {userRole === "user" ? (
-              <h1 ref={secondTitleButton} onClick={() => setProfileActiveTab(1)}>Проекты</h1>) : null}
-            {userRole === "worker" ? (
-              <>
-                <h1 ref={secondTitleButton} onClick={() => setProfileActiveTab(1)}>Задачи</h1>
-                <h1 ref={lastTitleButton} onClick={() => setProfileActiveTab(3)}>Мои отчеты</h1>
-              </>) : null}
+              <div className={styles.progressParent} style={{marginBottom: "15px"}}>
+                <div className={styles.status}><b>
+                  1 уровень
+                </b></div>
+                <div className={styles.progress}>
+                  <div className={styles.status}></div>
+                  <div style={{width: "30" + "%"}}></div>
+                </div>
+                <div className={styles.status}>
+                  <span>632</span> / 1000 xp
+                </div>
+              </div>
+            ) : null}
           </div>
           <>
-            {roadmapPage?(
+            {roadmapPage ? (
               <>
-                <RoadmapPage progress={"30"} onClick={()=>{
+                <RoadmapPage progress={"30"} onClick={() => {
                   setRoadmapPage(false)
                 }}/>
               </>
-            ):(
+            ) : (
               <>
                 {profileActiveTab === 0 ? profileTab() :
                   <>
@@ -307,114 +326,130 @@ export default function Index(props: any) {
         ) : (
           <>
             <div className={styles.profileInfo}>
-                  <div>
-                      <div className={styles.userData}>
-                          <h3>Name of user</h3>
-                          <h3>ID</h3>
-                          {birthdayString ? (
-                              <>
-                                  <div>Дата рождения</div>
-                                  <div>{birthdayString}</div>
-                              </>
-                          ) : null}
-                          <div>Электронная почта</div>
-                          <div>{userInfo.username}</div>
-                          <div>Telegram</div>
-                          <div>{userInfo.tgLink}</div>
-                          <div>Номер телефона</div>
-                          <div>{userInfo.phone}</div>
-                          <div>Пол</div>
-                          <div>{userInfo.gender}</div>
-                          <div>Город</div>
-                          <div>{userInfo.city}</div>
-                          <div>Роль / должность</div>
-                          <div>{userInfo.position}</div>
-                          <div>ВУЗ</div>
-                          <div>{userInfo.university}</div>
-                          {userInfo.roles?.length ? (
-                              <>
-                                  <div>Права доступа</div>
-                                  <div>{(userInfo.roles[0] === "admin" ? ("Администратор") : (
-                                          <>
-                                              {userInfo.roles[0] === "worker" ? "Сотрудник" : "Участник"}
-                                          </>)
-                                  )}</div>
-                              </>
-                          ) : (null)}
-                          {userRole === "user" ? (
-                              <>
+              <div>
 
-                                  <div>Навыки</div>
-                                  <div className={styles.tagsParent}>
-                                      {userInfo.skills?.map((e) => {
-                                          return (
-                                              <>
-                                                  <TagItem color={"green"}>{e}</TagItem>
-                                              </>
-                                          )
-                                      })}
-                                  </div>
-                              </>
-                          ) : null}
-                      </div>
-                      <Button type={"outline"} style={{marginTop: "20px"}}
-                              onClick={() => setEditProfile(true)}>Редактировать</Button>
-                  </div>
-                  {userRole === "user" && myTeam ? (
-                      <div className={styles.groupData}>
-                          <div className={styles.groupName}>
-                              <div>
-                                  <h2>Команда:</h2>
-                                  <h2>{myTeam.name}</h2>
-                              </div>
-                          </div>
-                          <div className={styles.usersList}>
-                              {myTeam.members.map((e, i) => {
-                                  return (
-                                      <>
-                                          <UserItem
+                <div className={styles.userData}>
+                  <h3>Name of user</h3>
+                  <h3>ID</h3>
 
-                                              buttonText={""}
-                                              onButton={() => {
-                                                  let buff = JSON.parse(JSON.stringify(groupTeam))
-                                                  buff.splice(i, 1)
-                                                  setGroupTeam(buff)
-                                              }}
-
-                                              userData={e}/>
-                                      </>
-                                  )
-                              })}
-                          </div>
-
-                      </div>
+                  {birthdayString ? (
+                    <>
+                      <div>Дата рождения</div>
+                      <div>{birthdayString}</div>
+                    </>
                   ) : null}
-              </div>
+                  <div>Электронная почта</div>
+                  <div>{userInfo.username}</div>
+                  <div>Telegram</div>
+                  <div>{userInfo.tgLink}</div>
+                  <div>Номер телефона</div>
+                  <div>{userInfo.phone}</div>
+                  <div>Пол</div>
+                  <div>{userInfo.gender}</div>
+                  <div>Город</div>
+                  <div>{userInfo.city}</div>
+                  <div>Роль / должность</div>
+                  <div>{userInfo.position}</div>
+                  <div>ВУЗ</div>
+                  <div>{userInfo.university}</div>
+                  {userInfo.roles?.length ? (
+                    <>
+                      <div>Права доступа</div>
+                      <div>{(userInfo.roles[0] === "admin" ? ("Администратор") : (
+                          <>
+                            {userInfo.roles[0] === "worker" ? "Сотрудник" : "Участник"}
+                          </>)
+                      )}</div>
+                    </>
+                  ) : (null)}
+                  {userRole === "user" ? (
+                    <>
 
-            <h2 style={{marginTop: 32}}>Роудмапы</h2>
-            <div className={styles.roadmaps}>
-              <RoadmapCard
-                title={'Первые шаги'}
-                description={'Для тебя открывается мир стартапов – стоит найти в нём свой путь.'}
-                status={RoadmapCardStatus.InProcess}
-                imgUrl={'./static/images/growth 1.png'}
-                availableFrom={0}
-              ></RoadmapCard>
-              <RoadmapCard
-                title={'От нуля до идеи'}
-                description={'Найди то, что сделает стартап стартапом - уникальную идею.'}
-                status={RoadmapCardStatus.Unavailable}
-                imgUrl={'./static/images/light-bulb (1) 1.png'}
-                availableFrom={0}
-              ></RoadmapCard>
-              <RoadmapCard
-                title={'Первые шаги'}
-                description={'Для тебя открывается мир стартапов – стоит найти в нём свой путь.'}
-                status={RoadmapCardStatus.Unavailable}
-                imgUrl={'./static/images/profits 1.png'}
-                availableFrom={0}
-              ></RoadmapCard>
+                      <div>Навыки</div>
+                      <div className={styles.tagsParent}>
+                        {userInfo.skills?.map((e) => {
+                          return (
+                            <>
+                              <TagItem color={"green"}>{e}</TagItem>
+                            </>
+                          )
+                        })}
+                      </div>
+                    </>
+                  ) : null}
+                </div>
+                <Button type={"outline"} style={{marginTop: "20px"}}
+                        onClick={() => setEditProfile(true)}>Редактировать</Button>
+              </div>
+              {userRole === "user" && myTeam ? (
+                <div className={styles.groupData}>
+                  <div className={styles.groupName}>
+                    <div>
+                      <h2>Команда:</h2>
+                      <h2>{myTeam.name}</h2>
+                    </div>
+                  </div>
+                  <div className={styles.usersList}>
+                    {myTeam.members.map((e, i) => {
+                      return (
+                        <>
+                          <UserItem
+
+                            buttonText={""}
+                            onButton={() => {
+                              let buff = JSON.parse(JSON.stringify(groupTeam))
+                              buff.splice(i, 1)
+                              setGroupTeam(buff)
+                            }}
+
+                            userData={e}/>
+                        </>
+                      )
+                    })}
+                  </div>
+
+                </div>
+              ) : null}
             </div>
+
+            {userRole === "user" ? (
+              <>
+                <h2 style={{marginTop: 32}}>Роудмапы</h2>
+                <div className={styles.roadmaps}>
+                  <RoadmapCard
+                    title={'Первые шаги'}
+                    description={'Для тебя открывается мир стартапов – стоит найти в нём свой путь.'}
+                    status={RoadmapCardStatus.InProcess}
+                    imgUrl={'./static/images/growth 1.png'}
+                    availableFrom={0}
+                    onClick={() => {
+                      setRoadmapPage(true)
+                    }}
+                  ></RoadmapCard>
+                  <RoadmapCard
+                    title={'От нуля до идеи'}
+                    description={'Найди то, что сделает стартап стартапом - уникальную идею.'}
+                    status={RoadmapCardStatus.Unavailable}
+                    imgUrl={'./static/images/PbIYSR5isdQ.jpg'}
+                    availableFrom={0}
+                  ></RoadmapCard>
+                  <RoadmapCard
+                    title={'Первые шаги'}
+                    description={'Для тебя открывается мир стартапов – стоит найти в нём свой путь.'}
+                    status={RoadmapCardStatus.Unavailable}
+                    imgUrl={'./static/images/hZhNJs1L7xM.jpg'}
+                    availableFrom={0}
+                  ></RoadmapCard>
+                </div>
+                <h2 style={{marginTop: 32}}>Достижения</h2>
+                <Achievements img={"/static/images/marketing.svg"} text={"Маркетинг"}/>
+                <Achievements img={"/static/images/creativity.svg"} text={"Креативность"}/>
+                <Achievements img={"/static/images/strategy.svg"} text={"Стратегия"}/>
+                <Achievements img={"/static/images/skills.svg"} text={"Навыки"}/>
+                <Achievements img={"/static/images/erudition.svg"} text={"Эрудиция"}/>
+
+              </>
+            ) : null}
           </>
 
         )}

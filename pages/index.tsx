@@ -10,7 +10,7 @@ export default function Home() {
     <div className={styles.parent}>
       <Header/>
       <FirstWidget name={"widget0"}/>
-      <ProjectsExample name={"widget1"}/>
+      {/*<ProjectsExample name={"widget1"}/>*/}
       <NotFoundCase/>
     </div>
   )

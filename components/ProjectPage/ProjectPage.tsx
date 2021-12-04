@@ -1,8 +1,10 @@
 import styles from './ProjectPage.module.scss'
 import TagItem from "../TagItem/TagItem";
-import React from "react";
+import React, {useState} from "react";
 import UserItem from "../UserItem/UserItem";
 import {projectData} from "../structures";
+import Button from "../Button/Button";
+import Switcher from "../Switcher/Switcher";
 
 interface projectPageProps {
   projectInfo: projectData
@@ -10,10 +12,32 @@ interface projectPageProps {
 
 
 export default function ProjectPage({projectInfo,}: projectPageProps) {
-
+  const [popout, setPopout] = useState(false)
 
   return (
     <div className={styles.parent}>
+
+      {popout ? (
+        <div className={styles.popoutParent}>
+          <div className={styles.popout}>
+            <div className={styles.contentPopoutParent}>
+              <div className={styles.title}>Отправка письма команде</div>
+              <div className={styles.text}>
+              </div>
+
+              <div>
+
+              </div>
+              <div className={styles.switchParent}>
+                <Button size={"s"} type={"outline"} onClick={() => {
+                  setPopout(false)
+                }}>Закрыть</Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
       <div className={styles.component}>
         <div className={styles.title}>{projectInfo.name}</div>
         <div>
@@ -65,7 +89,9 @@ export default function ProjectPage({projectInfo,}: projectPageProps) {
           </div>
         </div>
         <div>
-          <div className={styles.subtitle}>Требует сертификации: <span>{projectInfo.setrify}</span></div>
+          <div className={styles.subtitle}>Требует сертификации: <span>{projectInfo.setrify==="not"?"не требует":<>
+            {projectInfo.setrify==="yesNotHas"?"требует (не сертифицирован)":"требует (сертифицирован)"}
+          </>}</span></div>
         </div>
         <div>
           <div className={styles.subtitle}>Контактное лицо</div>
@@ -117,6 +143,11 @@ export default function ProjectPage({projectInfo,}: projectPageProps) {
               })}
             </div>
           </div>
+          {/*<div style={{marginTop:"25px",width:"100%",display:"flex",justifyContent:"center"}}>*/}
+          {/*  <Button size={"m"} type={"outline"} onClick={()=>{*/}
+          {/*    setPopout(true)*/}
+          {/*  }}>Отправить письмо команде</Button>*/}
+          {/*</div>*/}
         </div>
       </div>
     </div>

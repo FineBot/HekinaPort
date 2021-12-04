@@ -84,7 +84,14 @@ export default function ProjectsComponents({
                             <Button type={"outline"} size={"s"} onClick={() => {
                               window.location.href="/projects/edit/"+e.id
                             }}>Редактировать</Button>
-                            <Button type={"outline red"} size={"s"}>Удалить</Button>
+
+                            {userRole!=="user"?(
+                              <Button type={"outline red"} size={"s"} onClick={()=>{
+                                query2("/projects/"+e.id,"DELETE",undefined,()=>{
+                                  window.location.reload()
+                                })
+                              }}>Удалить</Button>
+                            ):null}
                           </div>
                         </div>
                       </div>
@@ -125,7 +132,13 @@ export default function ProjectsComponents({
                           <Button type={"outline"} size={"s"} onClick={() => {
                             window.location.href="/projects/edit/"+e.id
                           }}>Редактировать</Button>
-                          <Button type={"outline red"} size={"s"}>Удалить</Button>
+                          {userRole!=="user"?(
+                            <Button type={"outline red"} size={"s"} onClick={()=>{
+                              query2("/projects/"+e.id,"DELETE",undefined,()=>{
+                                window.location.reload()
+                              })
+                            }}>Удалить</Button>
+                          ):null}
                         </div>
                       </div>
                     </div>

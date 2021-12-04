@@ -18,7 +18,13 @@ interface TasksList {
 export default function TasksList({userId = "", userRole,tasksElements}: TasksList) {
   let initData: taskData[] = []
   const [tasks, setTasks] = useState(tasksElements)
+  let e:any="user"
+  const [role,setRole] = useState(e)
   const [editTask, setEditTask] = useState(-1)
+
+  useEffect(()=>{
+    setRole(parseJwt().sub)
+  },[])
 
   useEffect(()=>{
     setTasks(tasksElements)
@@ -78,14 +84,16 @@ export default function TasksList({userId = "", userRole,tasksElements}: TasksLi
                     </div>
                     <div className={styles.buttonsBlock}>
                       <Button type={"outline"} size={"s"} onClick={()=>{window.location.href="/tasks/"+e.id}}>Подробнее</Button>
-                      <Button type={"outline"} size={"s"} onClick={()=>{setEditTask(i)}}>Редактировать</Button>
-                      <Button type={"outline red"} size={"s"} onClick={()=>{
-                        query2("/tasks/"+e.id,"DELETE",undefined,(e:any)=>{
-                          let buff = JSON.parse(JSON.stringify(tasks))
-                          buff.splice(i,1)
-                          setTasks(buff)
-                        },()=>{})
-                      }}>Удалить</Button>
+                      {role!=="user"?(<>
+                        <Button type={"outline"} size={"s"} onClick={()=>{setEditTask(i)}}>Редактировать</Button>
+                        <Button type={"outline red"} size={"s"} onClick={()=>{
+                          query2("/tasks/"+e.id,"DELETE",undefined,(e:any)=>{
+                            let buff = JSON.parse(JSON.stringify(tasks))
+                            buff.splice(i,1)
+                            setTasks(buff)
+                          },()=>{})
+                        }}>Удалить</Button>
+                      </>):null}
                     </div>
                   </div>
                 </div>

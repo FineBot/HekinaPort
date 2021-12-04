@@ -21,7 +21,7 @@ export default function CreateUsers() {
     lastName: "",
     middleName: "",
     tgLink: "",
-    email: "",
+    username: "",
     roles: [""],
     skills: []
   }

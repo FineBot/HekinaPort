@@ -21,6 +21,7 @@
     .headerButtons{
       margin-bottom: 70px;
       display: grid;
+      width: 100%;
       row-gap: 15px;
       column-gap: 10px;
       grid-template-columns: 250px 150px 150px;
@@ -59,7 +60,7 @@
     .profileInfo{
       display: flex;
       row-gap: 70px;
-      column-gap: 50px;
+      column-gap: 100px;
       flex-wrap: wrap;
       .groupData{
         flex: 1 1 40%;
@@ -237,5 +238,64 @@
 
   @media (max-width: 756px) {
     grid-template-columns: 1fr;
+  }
+}
+
+
+.progressParent{
+
+}
+
+.status{
+  display: flex;
+  width: 100%;
+  font-size: 18px;
+  justify-content: flex-end;
+
+  & span:nth-child(1){
+    color: #FFBF54;
+  }
+  & span:nth-child(2){
+    color: $green;
+  }
+}
+.progress{
+  width: 150px;
+  @media(max-width: 700px) {
+    justify-content: center;
+    width: 150px;
+  }
+  position: relative;
+  & div:nth-child(1){
+    height: 7px;
+    border-radius: 17px;
+    background: #C4C4C4;
+  }
+  & div:nth-child(2){
+    background: #0F86CD;
+    height: 7px;
+    border-radius: 17px;
+    position: absolute;
+    bottom: 0%;
+  }
+
+}
+
+.progressParent{
+
+}
+
+.status{
+  display: flex;
+  width: 100%;
+  font-size: 18px;
+  justify-content: flex-start;
+
+  & span:nth-child(1){
+    color: #FFBF54;
+
+  }
+  & span:nth-child(2){
+    color: $green;
   }
 }

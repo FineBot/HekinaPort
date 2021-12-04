@@ -75,3 +75,26 @@
   display: block;
   margin: 0 auto;
 }
+
+.cardParent{
+  display: flex;
+  justify-content: center;
+  .firstCard{
+    cursor: pointer;
+    width: 400px;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    background-image: url("https://www.reg.ru/blog/media/2021/11/Domen.png");
+    border-radius: 15px;
+  }
+  .secondCard{
+    cursor: pointer;
+    width: 400px;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    background-image: url("https://cdn.forbes.ru/files/908x511/forbes_import/cx/cx00-1518-freelance-main.webp");
+    border-radius: 15px;
+  }
+}

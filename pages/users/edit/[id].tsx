@@ -17,7 +17,7 @@ export default function UsersEditPage() {
     lastName: "Фамилия",
     middleName: "Отчество",
     tgLink: "@test",
-    email: "mail@mail.ru",
+    username: "mail@mail.ru",
     skills: ["ML", "Android"]
   }
   const [userData, setUserData]=useState(user)

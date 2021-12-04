@@ -22,9 +22,8 @@ export default function RoadmapPage(props: any) {
         <div className={styles.popoutParent}>
           <div className={styles.popout}>
             <div className={styles.contentPopoutParent}>
-              <div className={styles.title}>ЗАГОЛОВОК ЕБАТЬ</div>
-              <div className={styles.text}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, consequuntur
-                eligendi est illum impedit inventore labore quae vero vitae voluptates.
+              <div className={styles.title}>{contentsPage.length>2?contentsPage[2]:null}</div>
+              <div className={styles.text}>{contentsPage.length>3?contentsPage[3]:null}
               </div>
               <div className={styles.switchParent}>
                 <Switcher onClick={(e: any) => {
@@ -62,27 +61,47 @@ export default function RoadmapPage(props: any) {
           setPopout(true)
           setContentsPage([(
             <>
-              <div>
-                Контент первой страницы
+              <div className={styles.cardParent}>
+                <div className={styles.secondCard} onClick={()=>{
+                  window.open("https://www.forbes.ru/svoi-biznes-column/predprinimateli/62721-nuzhen-li-vam-svoi-biznes")
+                }}>
+                </div>
               </div>
             </>
           ), (
             <>
-              <div>
-                Контент второй страницы
+              <div >
+                <iframe style={{borderRadius:"15px"}} width="560" height="315" src="https://www.youtube.com/embed/CRhof1sB9tE"
+                        title="YouTube video player" frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen></iframe>
               </div>
             </>
-          )])
+          ),"Зачем нужен бизнес?","Создай свой бизнес план и воплоти мечты в жизнь"])
         }} title={"01"} color={"orange"} text={"Зачем тебе в бизнес?"}/>
         <RoadmapStep onClick={() => {
           setPopout(true)
-        }} title={"01"} color={"orange"} text={"Зачем тебе в бизнес?"}/>
-        <RoadmapStep onClick={() => {
-          setPopout(true)
-        }} title={"01"} color={"orange"} text={"Зачем тебе в бизнес?"}/>
-        <RoadmapStep onClick={() => {
-          setPopout(true)
-        }} title={"01"} color={"orange"} text={"Зачем тебе в бизнес?"}/>
+          setContentsPage([(
+            <>
+              <div className={styles.cardParent}>
+                <div className={styles.firstCard} onClick={()=>{
+                  window.open("https://www.reg.ru/blog/sozdayom-lending-kotoryj-budet-prodavat/")
+                }}>
+                </div>
+              </div>
+            </>
+          ), (
+            <>
+              <div >
+                <iframe style={{borderRadius:"15px"}} width="560" height="315" src="https://www.youtube.com/embed/vfDJQ_yJ6QA"
+                        title="YouTube video player" frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen></iframe>
+              </div>
+            </>
+          ),"Уникальность бизнеса","У твоего бизнеса есть аналоги - это хорошо?"])
+        }} title={"02"} color={"orange"} text={"Уникальность бизнеса"}/>
+
       </div>
       <div className={styles.centerParent}>
         <img
