@@ -10,6 +10,18 @@ npm run dev
 yarn dev
 ```
 
+Авторизация у админа:
+
+`Юзер: admin, Пароль: admin`
+
+Авторизация у сотрудника:
+
+`Юзер: KonkordiyaTravnikova242@mail.ru, Пароль: 1234`
+
+Авторизация у участника:
+
+`Юзер: BudimirZagitov841@mail.ru, Пароль: 1234`
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `pages/[id].tsx`. The page auto-updates as you edit the file.
