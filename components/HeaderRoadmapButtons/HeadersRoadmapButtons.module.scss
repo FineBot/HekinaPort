@@ -1,0 +1,64 @@
+@import "components/colors";
+
+.parent{
+  display: flex;
+  align-items: center;
+  font-weight: 800;
+  font-size: 24px;
+  cursor: pointer;
+}
+.parent:active{
+  margin-top: 5px;
+  margin-bottom: -5px;
+}
+
+.parentContainer{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media(max-width: 700px) {
+    display: grid;
+    row-gap: 15px;
+  }
+}
+
+.progress{
+  width: 350px;
+  @media(max-width: 700px) {
+    justify-content: center;
+    width: 80vw;
+  }
+  position: relative;
+  & div:nth-child(1){
+    height: 15px;
+    border-radius: 17px;
+    background: #C4C4C4;
+  }
+  & div:nth-child(2){
+    background: #0F86CD;
+    height: 15px;
+    border-radius: 17px;
+    position: absolute;
+    bottom: 0%;
+  }
+
+}
+
+.progressParent{
+
+}
+
+.status{
+  display: flex;
+  width: 100%;
+  font-size: 18px;
+  justify-content: flex-end;
+
+  & span:nth-child(1){
+    color: #CC2872;
+  }
+  & span:nth-child(2){
+    color: $green;
+  }
+}

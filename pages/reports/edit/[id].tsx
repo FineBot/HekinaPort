@@ -42,6 +42,7 @@ export default function CreateReport(){
               query2("/reports/"+params.query.id,"PUT",(e),(e:any)=>{
                 setInfo(e)
                 setShow(true)
+                window.history.back()
               },()=>{})
             }}/>
           ):null}

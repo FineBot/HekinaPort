@@ -1,0 +1,24 @@
+.parent{
+  cursor: pointer;
+  background-color: #FFBF54;
+  border-radius: 22px;
+  padding: 60px 30px;
+  display: grid;
+  row-gap: 10px;
+
+
+  .title{
+    color: white;
+    font-size: 40px;
+  }
+  .text{
+    color: white;
+    font-size: 20px;
+  }
+}
+
+.parent[color=gray]{
+  background: linear-gradient(147.81deg, #D9D9D9 19.32%, #696969 87.72%);
+}
+
+

@@ -104,7 +104,7 @@ export function query(url,method,body,onLoad,onError){
 }
 
 export function query2(url,method,body,onLoad,onError){
-  fetch("http://10.11.162.172:3001" + url, {
+  fetch(process.env.NEXT_PUBLIC_API_URL + url, {
     method: method,
     headers: {
       "Authorization": "Bearer " + localStorage.getItem("accessToken"),

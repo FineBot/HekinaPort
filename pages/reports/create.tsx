@@ -26,9 +26,13 @@ export default function CreateReport(){
           <EditReport save={(e)=>{
             let buff:reportDate = JSON.parse(JSON.stringify(e))
             buff.author.id=parseJwt().id
-            query("/v1/users/"+parseJwt().id,"GET",undefined,(e:any)=>{
+            query2("/users/"+parseJwt().id,"GET",undefined,(e:any)=>{
               buff.author=e
-              query2("/reports","POST",buff)
+              query2("/reports","POST",buff,()=>{
+                window.history.back()
+              },()=>{
+                window.history.back()
+              })
 
             })
           }}/>

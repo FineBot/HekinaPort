@@ -1,7 +1,9 @@
-import {reportDate} from "../structures";
+import {reportDate, userData} from "../structures";
 import ProjectItem from "../ProjectItem/ProjectItem";
 import styles from './EditReport.module.scss'
 import Button from "../Button/Button";
+import {useEffect, useState} from "react";
+import {query2} from "../other";
 
 interface ReportsListProps {
   reports: reportDate[],
@@ -10,6 +12,14 @@ interface ReportsListProps {
 
 export default function ReportsList({reports, onDelete}: ReportsListProps) {
 
+  const [reportsDate,setReports] = useState(reports)
+
+  useEffect(()=>{
+    setReports(reportsDate)
+  },[reports])
+  useEffect(()=>{
+    setReports(reportsDate)
+  },[])
 
   return (
     <div className={styles.parentContainer}>
@@ -19,7 +29,7 @@ export default function ReportsList({reports, onDelete}: ReportsListProps) {
 
       <div className={styles.reportComponents}>
 
-        {reports.map((e, i) => {
+        {reportsDate.map((e, i) => {
 
           return <>
             <ProjectItem mode={"strict"} color={"outline"} text={
@@ -44,7 +54,12 @@ export default function ReportsList({reports, onDelete}: ReportsListProps) {
                           }}
                   >Редактировать</Button>
                   <Button size={"s"} type={"outline red"} onClick={()=>{
+                    let buff=JSON.parse(JSON.stringify(reports))
+                    let el = buff[i]
+                    buff.splice(i,1)
+                    setReports(buff)
 
+                    query2("/reports/"+el.id,"DELETE",undefined,()=>{})
                   }}>Удалить</Button>
                 </div>
               </div>

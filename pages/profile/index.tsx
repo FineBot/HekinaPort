@@ -1,22 +1,18 @@
 import styles from './index.module.scss'
 import Header from "../../components/Header/Header";
-import React, {AriaAttributes, DOMAttributes, useEffect, useState} from "react";
+import React, {DOMAttributes, useEffect, useState} from "react";
 import Button from "../../components/Button/Button";
-import ProjectItem from "../../components/ProjectItem/ProjectItem";
 import TagItem from "../../components/TagItem/TagItem";
 import EditProfile from '../../components/pagesComponents/profile/EditProfile'
-import EditProject from "../../components/pagesComponents/profile/EditProject";
 import UserItem from "../../components/UserItem/UserItem";
 import getMenuTabs from '../../components/getMenuTabs'
 import Tasks from '../../components/Tasks/TasksList';
 import ProjectsComponents from "../../components/ProjectsComponent/ProjectsComponent";
 import {projectData, reportDate, taskData, teamData, userData} from "../../components/structures";
-import EditorContainer from '../../components/Editor/Editor'
-import RichEditorExample from "../../components/Editor/Editor";
-import Editor from "../../components/Editor/Editor";
-import EditReport from "../../components/Reports/EditReport";
-import {parseJwt, query, query2} from "../../components/other";
+import {parseJwt, query2} from "../../components/other";
 import ReportsList from "../../components/Reports/ReportsList";
+import RoadmapPage from "../../components/RoadmapPage/RoadmapPage";
+import RoadmapCard, {RoadmapCardStatus} from "../../components/RoadmapCard/RoadmapCard";
 
 declare module 'react' {
   interface HTMLAttributes<T> extends DOMAttributes<T> {
@@ -43,7 +39,7 @@ export default function Index(props: any) {
     lastName: "",
     middleName: "",
     birthday: new Date(),
-    email: "",
+    username: "",
     phone: "",
     gender: "",
     city: "",
@@ -112,6 +108,21 @@ export default function Index(props: any) {
   const [editProfile, setEditProfile] = useState(false)
   const [isEditProject, setIsEditProject] = useState(-1)
 
+
+
+  // РОАДМАП СТАВИТСЯ ТУТ /\/\
+  //                      \  /
+  //                       \/
+
+
+  const [roadmapPage,setRoadmapPage]=useState(true)
+
+
+
+
+
+
+
   const firstTitleButton: React.RefObject<any> = React.createRef()
   const secondTitleButton: React.RefObject<any> = React.createRef()
   const lastTitleButton: React.RefObject<any> = React.createRef()
@@ -151,7 +162,7 @@ export default function Index(props: any) {
       firstName: "string",
       lastName: "string",
       middleName: "string",
-      email: "string",
+      username: "string",
       phone: "string",
       gender: "string",
       roles: [''],
@@ -161,7 +172,7 @@ export default function Index(props: any) {
       firstName: "string",
       lastName: "string",
       middleName: "string",
-      email: "string",
+      username: "string",
       phone: "string",
       gender: "string",
       roles: ["s"],
@@ -172,7 +183,7 @@ export default function Index(props: any) {
       firstName: "string",
       lastName: "string",
       middleName: "string",
-      email: "string",
+      username: "string",
       phone: "string",
       gender: "string",
       roles: ["s"],
@@ -232,25 +243,36 @@ export default function Index(props: any) {
                 <h1 ref={lastTitleButton} onClick={() => setProfileActiveTab(3)}>Мои отчеты</h1>
               </>) : null}
           </div>
-          {profileActiveTab === 0 ? profileTab() :
-            <>
-              {profileActiveTab === 1 ? (
-                <>
-                  {userRole === "user" ? projectsPage() : <>{userRole === "worker" ? (
-                    <Tasks userRole={userRole} tasksElements={tasksElements}/>) : (
-                    <ReportsList onDelete={(e) => {
+          <>
+            {roadmapPage?(
+              <>
+                <RoadmapPage progress={"30"} onClick={()=>{
+                  setRoadmapPage(false)
+                }}/>
+              </>
+            ):(
+              <>
+                {profileActiveTab === 0 ? profileTab() :
+                  <>
+                    {profileActiveTab === 1 ? (
+                      <>
+                        {userRole === "user" ? projectsPage() : <>{userRole === "worker" ? (
+                          <Tasks userRole={userRole} tasksElements={tasksElements}/>) : (
+                          <ReportsList onDelete={(e) => {
 
-                    }} reports={myReports}/>
-                  )}</>}
-                </>
-              ) : (
-                <>
-                  <ReportsList onDelete={(e) => {
-
-                  }} reports={myReports}/>
-                </>
-              )}
-            </>}
+                          }} reports={myReports}/>
+                        )}</>}
+                      </>
+                    ) : (
+                      <>
+                        <ReportsList onDelete={(e) => {
+                        }} reports={myReports}/>
+                      </>
+                    )}
+                  </>}
+              </>
+            )}
+          </>
         </div>
       </div>
     </div>
@@ -283,90 +305,118 @@ export default function Index(props: any) {
             // }).then(r  =>r.json())
           }}/>
         ) : (
-          <div className={styles.profileInfo}>
-            <div>
-              <div className={styles.userData}>
-                <h3>Name of user</h3>
-                <h3>ID</h3>
-                {birthdayString ? (
-                  <>
-                    <div>Дата рождения</div>
-                    <div>{birthdayString}</div>
-                  </>
-                ) : null}
-                <div>Электронная почта</div>
-                <div>{userInfo.username}</div>
-                <div>Telegram</div>
-                <div>{userInfo.tgLink}</div>
-                <div>Номер телефона</div>
-                <div>{userInfo.phone}</div>
-                <div>Пол</div>
-                <div>{userInfo.gender}</div>
-                <div>Город</div>
-                <div>{userInfo.city}</div>
-                <div>Роль / должность</div>
-                <div>{userInfo.position}</div>
-                <div>ВУЗ</div>
-                <div>{userInfo.university}</div>
-                {userInfo.roles?.length ? (
-                  <>
-                    <div>Права доступа</div>
-                    <div>{(userInfo.roles[0] === "admin" ? ("Администратор") : (
-                        <>
-                          {userInfo.roles[0] === "worker" ? "Сотрудник" : "Участник"}
-                        </>)
-                    )}</div>
-                  </>
-                ) : (null)}
-                {userRole === "user" ? (
-                  <>
-
-                    <div>Навыки</div>
-                    <div className={styles.tagsParent}>
-                      {userInfo.skills?.map((e) => {
-                        return (
-                          <>
-                            <TagItem color={"green"}>{e}</TagItem>
-                          </>
-                        )
-                      })}
-                    </div>
-                  </>
-                ) : null}
-              </div>
-              <Button type={"outline"} style={{marginTop: "20px"}}
-                      onClick={() => setEditProfile(true)}>Редактировать</Button>
-            </div>
-            {userRole === "user" && myTeam ? (
-              <div className={styles.groupData}>
-                <div className={styles.groupName}>
+          <>
+            <div className={styles.profileInfo}>
                   <div>
-                    <h2>Команда:</h2>
-                    <h2>{myTeam.name}</h2>
+                      <div className={styles.userData}>
+                          <h3>Name of user</h3>
+                          <h3>ID</h3>
+                          {birthdayString ? (
+                              <>
+                                  <div>Дата рождения</div>
+                                  <div>{birthdayString}</div>
+                              </>
+                          ) : null}
+                          <div>Электронная почта</div>
+                          <div>{userInfo.username}</div>
+                          <div>Telegram</div>
+                          <div>{userInfo.tgLink}</div>
+                          <div>Номер телефона</div>
+                          <div>{userInfo.phone}</div>
+                          <div>Пол</div>
+                          <div>{userInfo.gender}</div>
+                          <div>Город</div>
+                          <div>{userInfo.city}</div>
+                          <div>Роль / должность</div>
+                          <div>{userInfo.position}</div>
+                          <div>ВУЗ</div>
+                          <div>{userInfo.university}</div>
+                          {userInfo.roles?.length ? (
+                              <>
+                                  <div>Права доступа</div>
+                                  <div>{(userInfo.roles[0] === "admin" ? ("Администратор") : (
+                                          <>
+                                              {userInfo.roles[0] === "worker" ? "Сотрудник" : "Участник"}
+                                          </>)
+                                  )}</div>
+                              </>
+                          ) : (null)}
+                          {userRole === "user" ? (
+                              <>
+
+                                  <div>Навыки</div>
+                                  <div className={styles.tagsParent}>
+                                      {userInfo.skills?.map((e) => {
+                                          return (
+                                              <>
+                                                  <TagItem color={"green"}>{e}</TagItem>
+                                              </>
+                                          )
+                                      })}
+                                  </div>
+                              </>
+                          ) : null}
+                      </div>
+                      <Button type={"outline"} style={{marginTop: "20px"}}
+                              onClick={() => setEditProfile(true)}>Редактировать</Button>
                   </div>
-                </div>
-                <div className={styles.usersList}>
-                  {myTeam.members.map((e, i) => {
-                    return (
-                      <>
-                        <UserItem
+                  {userRole === "user" && myTeam ? (
+                      <div className={styles.groupData}>
+                          <div className={styles.groupName}>
+                              <div>
+                                  <h2>Команда:</h2>
+                                  <h2>{myTeam.name}</h2>
+                              </div>
+                          </div>
+                          <div className={styles.usersList}>
+                              {myTeam.members.map((e, i) => {
+                                  return (
+                                      <>
+                                          <UserItem
 
-                          buttonText={""}
-                          onButton={() => {
-                            let buff = JSON.parse(JSON.stringify(groupTeam))
-                            buff.splice(i, 1)
-                            setGroupTeam(buff)
-                          }}
+                                              buttonText={""}
+                                              onButton={() => {
+                                                  let buff = JSON.parse(JSON.stringify(groupTeam))
+                                                  buff.splice(i, 1)
+                                                  setGroupTeam(buff)
+                                              }}
 
-                          userData={e}/>
-                      </>
-                    )
-                  })}
-                </div>
+                                              userData={e}/>
+                                      </>
+                                  )
+                              })}
+                          </div>
 
+                      </div>
+                  ) : null}
               </div>
-            ) : null}
-          </div>
+
+            <h2 style={{marginTop: 32}}>Роудмапы</h2>
+            <div className={styles.roadmaps}>
+              <RoadmapCard
+                title={'Первые шаги'}
+                description={'Для тебя открывается мир стартапов – стоит найти в нём свой путь.'}
+                status={RoadmapCardStatus.InProcess}
+                imgUrl={'./static/images/growth 1.png'}
+                availableFrom={0}
+              ></RoadmapCard>
+              <RoadmapCard
+                title={'От нуля до идеи'}
+                description={'Найди то, что сделает стартап стартапом - уникальную идею.'}
+                status={RoadmapCardStatus.Unavailable}
+                imgUrl={'./static/images/light-bulb (1) 1.png'}
+                availableFrom={0}
+              ></RoadmapCard>
+              <RoadmapCard
+                title={'Первые шаги'}
+                description={'Для тебя открывается мир стартапов – стоит найти в нём свой путь.'}
+                status={RoadmapCardStatus.Unavailable}
+                imgUrl={'./static/images/profits 1.png'}
+                availableFrom={0}
+              ></RoadmapCard>
+            </div>
+          </>
+
         )}
       </>
     )
